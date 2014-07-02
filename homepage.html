@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.clearfix:after {
+				visibility: hidden;
+				display: block;
+				content: " ";
+				clear: both;
+				height: 0;
+			}
+			.clearfix {zoom:1;}
+
+			#header,#footer {background: #20b2aa}
+			#header {height: 40px;}
+			#footer {height: 30px;}
+			
+			#layout {background: #20b2aa;}
+			#left,#midle,#right {height: 500px;}
+			#right {float: right; width: 300px; background: #20b2aa;}
+			#left {float: left; width: 490px; background: #afeeee;}
+			#midle {margin-right: 310px; margin-left: 510px; background: #dcdcdc}
+			.shadow {
+				border:2px solid;
+				border-radius:25px;
+				-moz-border-radius:25px;
+				box-shadow: 10px 10px 5px #888888;
+			}
+			.transition {
+				transition: width 2s;
+				-moz-transition: width 2s;
+				-webkit-transition: width 2s;
+				-o-transition: width 2s;
+			}
+		</style>
+	</head>
+	<body bgcolor="#20b2aa">
+		<div id="header">
+			<h1 style="margin-left:20px">sh_torrent</h1>
+		</div>
+		<div id="layout" class="clearfix">
+			<div id="left" class="shadow">
+                <strong  style="margin-left:20px">个人日志</strong>
+                <ul>
+                	<li>01/07/2014&nbsp&nbsp&nbsp&nbsp<a href="https://github.com/sh-torrent/sh-torrent.github.io">第一课</a></li>
+                </ul>
+           	</div>
+			<div id="right">
+                <img src="https://raw.githubusercontent.com/sh-torrent/sh-torrent.github.io/master/portrait.jpg" alt="portrait.jpg" width="200" height="200" style="margin-left:20px">
+                </br>
+                <h4 style="margin-left:20px">关于我</h4>
+				<p style="margin-left:20px">人懒,嘴不甜,长得磕碜,还没钱</p>
+                <ul>
+                	<li>sh_torrent</li>
+                	<li>邮箱:thsssh@163.com</li>
+                	<li><a href="https://github.com/sh-torrent/">github.com/sh_torrent</a></li>
+                </ul>
+            </div>
+            <div id="midle" class="shadow">
+            	<strong style="margin-left:20px">web前端课程展示</strong>
+            	<ul>
+            		<li><a href="https://github.com/sh-torrent/sh-torrent.github.io">第一次作业</a></li>
+            	</ul>
+            </div>
+		</div>
+		<div id="footer">
+			<p style="margin-left:20px">Lvl-1,菜鸟,升级所需代码量:未知...</p>
+		</div>
+	</body>
+</html>
