@@ -79,10 +79,10 @@
 
 
     <script type="text/javascript">
-        if(localStorage.img_slide)
+        if(localStorage.mimg)
         {
-            document.querySelector('.img_slide').src = localStorage.img_slide;
-            document.querySelector('.des').innerHTML = localStorage.des;
+            document.querySelector('.img_slide').src = localStorage.mimg;
+            document.querySelector('.des').innerHTML = localStorage.mdes;
         }
         else
         {
@@ -111,9 +111,9 @@
         	}
         }
         document.querySelector('.img_slide').src = data.src_list[next];
-        localStorage.img_slide = document.querySelector('.img_slide').src;
+        localStorage.mimg = document.querySelector('.img_slide').src;
         document.querySelector('.des').innerHTML = data.des_list[next];
-        localStorage.des = document.querySelector('.des').innerHTML;
+        localStorage.mdes = document.querySelector('.des').innerHTML;
     }
 
     function img_right_handler() {
@@ -155,9 +155,9 @@
             }
         }
         document.querySelector('.img_slide').src = data.src_list[next];
-        localStorage.img_slide = document.querySelector('.img_slide').src;
+        localStorage.mimg = document.querySelector('.img_slide').src;
         document.querySelector('.des').innerHTML = data.des_list[next];
-        localStorage.des = document.querySelector('.des').innerHTML;
+        localStorage.mdes = document.querySelector('.des').innerHTML;
     }
 
     function img_left_handler() {
