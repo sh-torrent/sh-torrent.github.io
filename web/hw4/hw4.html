@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <title>lol</title>
+    <script type="text/javascript" src="http://www.w3school.com.cn/jquery/jquery.js"></script>
+    <style type="text/css">
+    .img_slide{
+        position: relative;
+        left: 20%;
+        width: 60%;
+        height: width*0.75*0.6;
+    }
+    .comment{
+        position: relative;
+        left: 20%;
+        width: 60%;
+        height: 100px;
+    }
+    .title{
+        position: relative;
+        left: 20%;
+        width: 60%;
+        height: 50px;
+    }
+    .des{
+        position: absolute;
+        left: 21%;
+        width: 58%;
+    }
+    .leftArrow{
+        position: absolute;
+        -webkit-transform:rotate(180deg);
+        left: 15%;
+        top: 190px;
+        width: 20px;
+        height: 70px;
+    }
+    .rightArrow{
+        position: absolute;
+        right: 15%;
+        top: 190px;
+        width: 20px;
+        height: 70px;
+    }
+    </style>
+</head>
+<body background="http://fyit.webege.com/fyitwp/allqz/7435778410/T2aI8mXcXaXXXXXXXX_%21%2126181604.jpg_620x10000.jpg">
+
+    <img class="leftArrow" src="http://cdns2.freepik.com/free-photo/right-arrow_318-9317.jpg">
+    <img class="rightArrow" src="http://cdns2.freepik.com/free-photo/right-arrow_318-9317.jpg">
+    <div class="des"></div>
+    <img class = "img_slide" src = "1">
+    </br></br></br></br>
+    <div class="title">
+        评论区，共3页，14条，第<b class="page">1</b>页&nbsp&nbsp<b class="buttonup">上一页</b> <b class="buttondown">下一页</b>
+    </div>
+
+    <div class="comment">
+        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" color=#8C8C8C SIZE=2>
+        <p>话说酒神17号才到西雅图，这几天在干啥，卖猪肉么？</p>
+    </div>
+    <div class="comment">
+        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" color=#8C8C8C SIZE=2>
+        <p>NB居然输给液体和FNATIC了，不哭不是西恩人啊</p>
+    </div>
+    <div class="comment">
+        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" color=#8C8C8C SIZE=2>
+        <p>拉谁？说话！拉谁？！</p>
+    </div>
+    <div class="comment">
+        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" color=#8C8C8C SIZE=2>
+        <p>WTF?!</p>
+    </div>
+    <div class="comment">
+        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" color=#8C8C8C SIZE=2>
+        <p>希望中国队能包揽TI4前3！</p>
+    </div>
+
+
+    <script type="text/javascript">
+        if(localStorage.img_slide)
+        {
+            document.querySelector('.img_slide').src = localStorage.img_slide;
+            document.querySelector('.des').innerHTML = localStorage.des;
+        }
+        else
+        {
+            document.querySelector('.img_slide').src = "http://storage.slide.news.sina.com.cn/slidenews/69_t5000/2014_28/58937_75028_454628.jpg";
+            document.querySelector('.des').innerHTML = "梅西遭三人夹防，前边挡一个，旁边紧贴一个，后面跟一个。";
+        }
+    </script>
+
+    <script type="text/javascript">
+
+    //图片轮播
+    var url_img='img.json';
+    var url_des='des.json';
+
+    var cir = setInterval("img_right_ajax()", 5000);
+
+    function img_right_processData(data) {
+        var current = document.querySelector('.img_slide').src;
+        var next;
+        for(var i = 0; i < 5; i++)
+        {
+        	if(current == data.src_list[i])
+        	{
+        		next = (i + 1) % 5;
+        		break;
+        	}
+        }
+        document.querySelector('.img_slide').src = data.src_list[next];
+        localStorage.img_slide = document.querySelector('.img_slide').src;
+        document.querySelector('.des').innerHTML = data.des_list[next];
+        localStorage.des = document.querySelector('.des').innerHTML;
+    }
+
+    function img_right_handler() {
+        if (this.readyState == this.DONE) {
+            if (this.status == 200) {
+                try {
+                    img_right_processData(JSON.parse(this.responseText));
+            } catch(ex) {
+                console.log(ex.message);
+                }
+            }
+        }
+    }
+
+    function img_right_ajax() {
+        var client = new XMLHttpRequest();
+        client.onreadystatechange = img_right_handler;
+        client.open('GET', url_img);
+        client.send();
+    }
+
+    document.querySelector('.rightArrow').addEventListener('click', function() {
+    window.clearInterval(cir);
+    $('.img_slide').fadeTo(800, 0.6);
+    setTimeout("img_right_ajax()", 800);
+    $('.img_slide').fadeTo(800, 1.0);
+    cir = setInterval("img_right_ajax()", 5000);
+    });
+
+    function img_left_processData(data) {
+        var current = document.querySelector('.img_slide').src;
+        var next;
+        for(var i = 0; i < 5; i++)
+        {
+            if(current == data.src_list[i])
+            {
+                next = (i + 4) % 5;
+                break;
+            }
+        }
+        document.querySelector('.img_slide').src = data.src_list[next];
+        localStorage.img_slide = document.querySelector('.img_slide').src;
+        document.querySelector('.des').innerHTML = data.des_list[next];
+        localStorage.des = document.querySelector('.des').innerHTML;
+    }
+
+    function img_left_handler() {
+        if (this.readyState == this.DONE) {
+            if (this.status == 200) {
+                try {
+                    img_left_processData(JSON.parse(this.responseText));
+            } catch(ex) {
+                console.log(ex.message);
+                }
+            }
+        }
+    }
+
+    function img_left_ajax() {
+        var client = new XMLHttpRequest();
+        client.onreadystatechange = img_left_handler;
+        client.open('GET', url_img);
+        client.send();
+    }
+
+    document.querySelector('.leftArrow').addEventListener('click', function() {
+    window.clearInterval(cir);
+    $('.img_slide').fadeTo(800, 0.6);
+    setTimeout("img_left_ajax()", 800);
+    $('.img_slide').fadeTo(800, 1.0);
+    cir = setInterval("img_right_ajax()", 5000);
+    });
+
+    //伪评论
+    var url_com='comment.json';
+
+    function com_down_processData(data) {
+        var pageIndex = document.querySelector('.page').innerHTML;
+        pageIndex = parseInt(pageIndex);
+        var com = document.getElementsByTagName('p');
+        var commentNum = data.comment_list.length;
+        if(pageIndex < 3)
+        {
+            for(var i = 0; i < 5; i++)
+            {
+                var num = 5 * pageIndex + i;
+                if(num < commentNum)
+                {
+                    com[i].innerHTML = data.comment_list[num];
+                }
+                else
+                {
+                    com[i].innerHTML = "";
+                }
+            }
+            document.querySelector('b').innerHTML = pageIndex + 1;
+        }
+    }
+
+    function com_down_handler() {
+        if (this.readyState == this.DONE) {
+            if (this.status == 200) {
+                try {
+                    com_down_processData(JSON.parse(this.responseText));
+            } catch(ex) {
+                console.log(ex.message);
+                }
+            }
+        }
+    }
+
+    function com_down_ajax() {
+        var client = new XMLHttpRequest();
+        client.onreadystatechange = com_down_handler;
+        client.open('GET', url_com);
+        client.send();
+    }
+
+    function com_up_processData(data) {
+        var pageIndex = document.querySelector('.page').innerHTML;
+        pageIndex = parseInt(pageIndex);
+        var com = document.getElementsByTagName('p');
+        var commentNum = data.comment_list.length;
+        if(pageIndex > 1)
+        {
+            for(var i = 0; i < 5; i++)
+            {
+                var num = 5 * pageIndex + i - 10;
+                if(num >= 0)
+                {
+                    com[i].innerHTML = data.comment_list[num];
+                }
+                else
+                {
+                    com[i].innerHTML = "";
+                }
+            }
+            document.querySelector('b').innerHTML = pageIndex - 1;
+        }
+    }
+
+    function com_up_handler() {
+        if (this.readyState == this.DONE) {
+            if (this.status == 200) {
+                try {
+                    com_up_processData(JSON.parse(this.responseText));
+            } catch(ex) {
+                console.log(ex.message);
+                }
+            }
+        }
+    }
+
+    function com_up_ajax() {
+        var client = new XMLHttpRequest();
+        client.onreadystatechange = com_up_handler;
+        client.open('GET', url_com);
+        client.send();
+    }
+
+    document.querySelector('.buttondown').addEventListener('click', function() {
+    com_down_ajax();});
+
+    document.querySelector('.buttonup').addEventListener('click', function() {
+    com_up_ajax();});
+
+    //鼠标悬停
+    $('.img_slide').mouseenter(function(){
+        window.clearInterval(cir);
+        $('.img_slide').fadeTo(1000, 0.3);
+
+    });
+    $('.img_slide').mouseleave(function(){
+        $('.img_slide').fadeTo(1000, 1);
+        cir = setInterval("img_right_ajax()", 5000);
+    });
+
+
+        
+    </script>
+</body>
+</html>
